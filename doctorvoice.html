@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  
+    <title>Doctor's Voice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap CSS -->
+    <!--<link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- CSS 2 -->
+    <!--<link href="static/css/css2.css" rel="stylesheet">-->
+
+    <!-- Load icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!--<link rel="shortcut icon" type="image/png" href="static/img/favicon.ico"/>-->
+
+    <style>
+
+  body {
+    padding-top: 56px;
+    background-image: url("https://images.pexels.com/photos/669238/pexels-photo-669238.png?w=1200&h=627&fit=crop&auto=compress&cs=tinysrgb");
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+
+  .carousel-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .portfolio-item {
+    margin-bottom: 30px;
+  }
+
+  .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+.navbar-toggler {
+  border-color: rgb(255, 255, 255) !important;
+} 
+
+    .form-inlinee {
+        display: flex
+    }
+
+    .chatcard{
+        border-radius: 10%;
+        background-color: rgb(218, 218, 218);
+    }
+
+    .size-restricted-savedcards {
+        max-width: 25rem;
+    }
+
+    .request-shadow{
+        border-radius: 8%;
+        /*border-width: medium;*/
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0); /*0.7 in the last for shadow*/
+    }
+
+    #addnotepage {
+        display: none;
+    }
+
+    #notedisplay {
+        display: none;
+    }
+
+    .size-restricted {
+        max-width: 40rem;
+    }
+
+    .size-restricted-login {
+        max-width: 23rem;
+    }
+
+    .size-restricted-admission {
+        max-width: 50rem;
+    }
+
+    .recordbutton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 22px;
+      gap: 8px;
+      height: 40px;
+      border: none;
+      background: #b6b6b6de;
+      border-radius: 20px;
+      color: #000000;
+      cursor: pointer;
+    }
+
+    .recordbutton:disabled {
+      background: #8f8f8fde;
+      cursor: not-allowed;
+    }
+
+    .stopbutton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 22px;
+      gap: 8px;
+      height: 40px;
+      border: none;
+      background: #ff5050de;
+      border-radius: 20px;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .highlighted {
+      background-color: rgb(255, 192, 192);
+    }
+
+    .table-doctor {
+      border-collapse: separate;
+      border-spacing: 50px 0;
+      width: 100%;
+    }
+
+    </style>
+
+    </style>
+
+ </head>
+
+<body>
+
+  <!-- Top Menu -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-primary fixed-top">
+    <div class="container">
+      <!--<a onclick="location.reload()" class="navbar-brand text-light" style="cursor: pointer;">Doctor's Voice</a>-->
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarResponsive">
+        <ul class="navbar-nav">
+
+                <li class="nav-item linksmain">
+                    <a onclick="location.reload()" class="nav-link text-light" style="cursor: pointer;">Main Page</a>
+                </li>
+
+                <li class="nav-item linksmain">
+                    <a onclick="buildlist()" class="nav-link text-light" style="cursor: pointer;">Patient List</a>
+                </li>
+
+                <li class="nav-item linksmain">
+                  <a onclick="changepage('new1')" class="nav-link text-light" style="cursor: pointer;">New Patient</a>
+                </li>
+
+                <li class="nav-item linksmain">
+                  <a onclick="" class="nav-link text-light" style="cursor: pointer;">Contact Us</a>
+                </li>
+
+                <li class="nav-item linksmain">
+                    <a onclick="logout()" class="nav-link text-light" style="cursor: pointer;">Logout</a>
+                </li>
+
+
+                <li class="nav-item linkstwostep">
+                    <a onclick="logout()" class="nav-link text-light" style="cursor: pointer;">Logout</a>
+                </li>
+
+                <li class="nav-item" id="linksempty">
+                    <a class="nav-link text-light">&nbsp;</a>
+                </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Content -->
+
+  <br>
+
+  <div class="container">
+
+    
+
+    <div id="loginpage" style="display: none;">
+
+        <center>
+
+        <div class="card size-restricted-login" >
+            <div class="card-body">
+              <h5 class="card-title"><h3><b>Login</b></h3></h5>
+              Log in using your doctor credentials
+              <br>
+              <br>
+              <form action="javascript:login()">
+
+                <input autocomplete="off" type="text" maxlength="30" class="form-control" id="usernameinput" placeholder="Username">
+                <br>
+                <input autocomplete="off" type="password" maxlength="30" class="form-control" id="passwordinput" placeholder="Password">
+                
+                <br>
+                <button type="submit" class="btn btn-primary">Enter</button>
+              </form> 
+
+              <br><a href="#">&raquo; Problems to log in? &laquo;</a>
+            </div>
+        </div>
+        <br>
+
+        </center>
+
+    </div>
+
+    <div id="twosteppage" style="display: none;">
+
+        <center>
+        <br><br>
+        <div class="card size-restricted-login" >
+            <div class="card-body">
+              <h5 class="card-title"><h3><b>Two Step Authentication</b></h3></h5>
+              Insert the code that you received
+              <br>
+              <br>
+              <form action="javascript:twostep()">
+
+                <input type="text" autocomplete="off" maxlength="30" class="form-control" id="codeinput" placeholder="Code">
+                <br>
+                <button type="submit" class="btn btn-primary">Enter</button>
+              </form>
+
+              <br><a href="#">&raquo; Problems to log in? &laquo;</a>
+            </div>
+        </div>
+        <br><br><br>
+
+        </center>
+
+    </div>
+
+    <div id="mainpage" style="display: none;">
+        <br>
+        <center>
+
+        <div class="card" style="max-width: 40rem; overflow-x:auto;">
+          <br>
+          <h2>Doctor's Info</h2><br>
+
+        <table class="table-doctor">
+          <tr>
+            <td rowspan="7"><img src="https://i.postimg.cc/hPMT4TN2/user.png" width="120" height="120"></img></td>
+            <th>Name</th>
+            <td id="tablename"></td>
+          </tr>
+          <tr>
+
+            <th>Surname</th>
+            <td id="tablesurname"></td>
+          </tr>
+          <tr>
+            
+            <th>Institution</th>
+            <td id="tableinstitution"></td>
+          </tr>
+          <tr>
+            
+            <th>Specialisation</th>
+            <td id="tablespecialisation"></td>
+          </tr>
+          <tr>
+            
+            <th>Country</th>
+            <td id="tablecountry"></td>
+          </tr>
+          <tr>
+            
+            <th>Email</th>
+            <td id="tableemail"></td>
+          </tr>
+          <tr>
+            
+            <th>Phone Number</th>
+            <td id="tablephone"></td>
+          </tr>
+        </table>
+        <br>
+      </div>
+
+      </center>
+      <br><br><br>
+    </div>
+
+
+    <div id="new1" style="display: none;">
+
+      <a href="#" onclick="location.reload()"><i class="fa fa-arrow-left"></i> Back</a><br><br>
+
+        
+       <center>
+        <div class="card size-restricted" >
+            <div class="card-body">
+              
+              <h4 class="card-title">New Patient</h4>
+
+                <p>First enter the patient name and the date to proceed with the admission document</p>
+                <input type="date" autocomplete="off" class="form-control" id="inputdate">
+                <br>
+                <input type="text" autocomplete="off" class="form-control" id="inputpatientname" placeholder="Patient Name">
+
+
+                <br>
+                <button onclick="nextstep()" style="width: 60%;" class="btn btn-primary">Start Admission</button>
+                <button onclick="location.reload()" class="btn btn-danger"><i class="fa fa-close"></i>&nbsp; Cancel</button>
+
+            </div>
+          </div>
+        </center>
+        <br>
+
+    </div>
+
+    <div id="new2" style="display: none;">
+
+       <center>
+        <div class="card size-restricted-admission" >
+            <div class="card-body">
+              
+              <h4 class="card-title">Admission Document</h4>
+
+              <div class="d-flex flex-row">
+                
+                <div class="p-2">
+                  <select class="form-control" id="selectinputlan" onchange="changelan(this)">
+                    <option value="inglese:en-US" selected>Input Language</option>
+                    <option value="inglese:en-US">English</option>
+                    <option value="italiano:it-IT">Italian</option>
+                    <option value="ceco:cs">Czech</option>
+                  </select>
+                </div>
+
+                <div class="p-2">
+                  <select class="form-control" id="selectoutputlan" onchange="changelan(this)">
+                    <option value="inglese:en-US" selected>Output Language</option>
+                    <option value="inglese:en-US">English</option>
+                    <option value="italiana:it-IT">Italian</option>
+                    <option value="ceca:cs">Czech</option>
+                  </select>
+                </div>
+
+                <div class="p-2">
+                  <button onclick="startrecording()" class="recordbutton" id="startbutton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#ff342b"><rect y="3" x="9" width="6" rx="3" height="11"></rect><path d="m12 18v3"></path><path d="m8 21h8"></path><path d="m19 11c0 3.866-3.134 7-7 7-3.86599 0-7-3.134-7-7"></path></g></svg>
+                    <span class="label">Rec</span>
+                  </button>
+                  <button onclick="stoprecording()" class="stopbutton" id="stopbutton" style="display: none;"><i class="fa fa-stop"></i>&nbsp; Stop Recording</button>
+                </div>
+
+                <div class="p-2">
+                  <button class="recordbutton" id="processbutton" onclick="process()"><i class="fa fa-arrow-right"></i> Fill</button>
+                </div>
+              
+              </div>
+
+                <input type="hidden" value="inglese:en-US" id="inputlan">
+                <input type="hidden" value="inglese:en-US" id="outputlan">
+              
+              
+                <textarea class="form-control" id="rec" autocomplete="off" placeholder="Speech..."></textarea><br>
+                <input type="hidden" class="form-control" id="inputdate2">
+                <input type="hidden" class="form-control" id="inputpatientname2" placeholder="Patient Name">
+
+                <div id="cardsarea" class="row"></div>
+                
+                <button onclick="save()" class="btn btn-success"><i class="fa fa-save"></i>&nbsp; Save</button>
+
+            </div>
+          </div>
+        </center>
+        <br>
+
+
+    </div>
+
+    <div id="patientlist" style="display: none;">
+      <br>
+      <a href="#" onclick="location.reload()"><i class="fa fa-arrow-left"></i> Back</a><br><br>
+
+      <center>
+
+      <h4>Patient List</h4><br>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Patient Name</th>
+            <th scope="col">Date of Last Visit</th>
+            <th scope="col">Date of First Visit</th>
+            <th scope="col">Treating Practitioner</th>
+          </tr>
+        </thead>
+        <tbody id="tablebody"></tbody>
+      </table>
+
+      </center>
+
+      <br><br><br><br><br><br><br>
+
+    </div>
+
+    <div id="view" style="display: none;">
+
+      <a href="#" onclick="changepage('patientlist')"><i class="fa fa-arrow-left"></i> Back</a><br><br>
+
+        
+        <center>
+        <div class="card size-restricted" >
+            <div class="card-body">
+              
+              <h4 class="card-title" id="notetitle"></h4>
+
+              <h4 class='card-subtitle mb-2' id="notepatient"></h4><br>
+
+              <div id="components">
+
+              </div>
+
+            </div>
+          </div>
+        </center>
+        <br>
+
+    </div>
+
+
+  </div>
+
+
+  <br>  
+
+  <!-- Footer -->
+  <footer class="py-4 bg-primary">
+    <div class="container">
+      <!--<p class="m-0 text-center text-dark">&copy;</p>-->
+      <p class="text-center text-light">Doctor's Voice &copy;</p>
+      <p class="m-0 text-center text-light"><a onclick="erase()" style="cursor: pointer;">Delete all data</a></p>
+      <p class="m-0 text-center text-light">&nbsp;</p>
+      <p class="m-0 text-center text-light">&nbsp;</p>
+
+      <br>
+    </div>
+  </footer>
+
+
+
+
+  <script>
+
+
+function display(a){
+
+    var data = eval(localStorage.getItem("notes"));
+    var element=null;
+
+    for(var i = 0; i<Object.keys(data).length; i++){
+
+      if(data[i]['patientname']==a.textContent){
+        element=data[i];
+        break;
+      }
+
+    }
+
+    if(element==null){
+      location.reload();
+      return;
+    }
+
+    document.getElementById("notetitle").textContent = element['title'];
+    document.getElementById("notepatient").textContent = element['patientname'];
+
+    var f = eval(localStorage.getItem("sections"));
+    var codestring = "";
+
+    for(var i = 0; i<Object.keys(f).length; i++){
+      
+      var inputs = f[i]['fields'];
+      for(var j = 0; j<Object.keys(inputs).length; j++){
+
+        try{
+          codestring = codestring + '<p><b>'+inputs[j]['name']+': </b>'+element[inputs[j]['id']]+'</p>';
+        }catch{
+
+        }
+
+      }
+
+    }
+
+    document.getElementById("components").innerHTML = codestring;
+
+    changepage("view");
+
+}
+
+
+function buildlist(){
+
+  changepage("patientlist");
+
+  var data = eval(localStorage.getItem("notes"));
+  var doctors = eval(localStorage.getItem("credentials"));
+  var total = "";
+
+  for(var i = 0; i<Object.keys(data).length; i++){
+
+    var docname = "";
+
+    for(var j = 0; j<Object.keys(doctors).length; j++){
+
+      if(doctors[j]['id']==data[i]['doctorid']){ docname=doctors[j]['name']+" "+doctors[j]['surname']; break;}
+      
+    }
+
+    total = total + "<tr><td><a href='#' onclick='display(this)' style='cursor: pointer;'>"+data[i]['patientname']+"</a></td><td>"+data[i]['date']+"</td><td>"+data[i]['date']+"</td><td>"+docname+"</td></tr>";
+    
+  }
+
+  document.getElementById("tablebody").innerHTML = total;
+
+}
+
+
+function save(){
+
+    var obj = {}
+
+    obj['patientname'] = document.getElementById("inputpatientname2").value;
+    obj['date'] = document.getElementById("inputdate2").value;
+
+    var info = eval(localStorage.getItem("session"));
+
+    obj['doctorid']=info[0]['id'];
+
+    var data = eval(localStorage.getItem("sections"));
+
+    for(var i = 0; i<Object.keys(data).length; i++){
+
+      var f = data[i]['fields'];
+
+      for(var j = 0; j<Object.keys(f).length; j++){
+
+        obj[f[j]['id']] = document.getElementById(f[j]['id']).value;
+
+      }
+
+    }
+
+    var data = localStorage.getItem("notes");
+
+    if(data==null){
+      var temp = [];
+      temp.push(obj);
+      localStorage.setItem('notes',JSON.stringify(temp));
+    }else{
+      data=eval(data);
+      data.push(obj);
+      localStorage.setItem('notes',JSON.stringify(data));
+    }
+
+    buildlist();
+
+}
+
+
+function nextstep(){
+
+    var date = document.getElementById("inputdate").value;
+    var patientname = document.getElementById("inputpatientname").value;
+
+    changepage("new2");
+
+    document.getElementById("inputdate2").value = date;
+    document.getElementById("inputpatientname2").value = patientname;
+
+    var data = eval(localStorage.getItem("sections"));
+    var total = "";
+
+    for(var i = 0; i<Object.keys(data).length; i++){
+
+      var partial = "";
+      var f = data[i]['fields'];
+
+      for(var j = 0; j<Object.keys(f).length; j++){
+        
+        if(f[j]['type']=="text"){
+          partial = partial + '<input type="text" autocomplete="off" class="form-control" id="'+f[j]['id']+'" placeholder="'+f[j]['name']+'">';
+        }
+
+        if(j!=(Object.keys(f).length-1)){
+          partial = partial + "<br>";
+        }
+
+      }
+
+      total = total + "<div class='col-lg-6 col-sm-6 portfolio-item'><div class='card h-100 size-restricted-savedcards'><div class='card-body'><p class='card-title'><b>"+data[i]['title']+"</b></p>"+partial+"</div></div></div>";
+
+    }
+
+    document.getElementById("cardsarea").innerHTML = total;
+
+}
+
+
+function twostep(){
+
+    if(document.getElementById("codeinput").value.length!=0){
+        var data = eval(localStorage.getItem("session"));
+
+        data[0]['twostepdone']=true;
+
+        localStorage.setItem('session', JSON.stringify(data));
+
+        loadhome();
+    }
+
+}
+
+
+function loadhome(){
+
+    var data = eval(localStorage.getItem("session"));
+    var users = eval(localStorage.getItem("credentials"));
+    var obj = null;
+    var id = data[0]['id'];
+
+    for(var i=0; i<users.length;i++){
+      if(users[i]['id']==id){
+        obj = users[i];
+      }
+    }
+
+    if(data[0]['id']==null){
+        var test = document.getElementsByClassName("linksmain");
+        for(var i=0;i<test.length;i++){ test[i].style.display="none"}
+        var test = document.getElementsByClassName("linkstwostep");
+        for(var i=0;i<test.length;i++){ test[i].style.display="none"}
+        document.getElementById("linksempty").style.display = "block";
+        changepage("loginpage");
+    }else{
+        if(data[0]['twostepdone']==false){
+            changepage("twosteppage");
+            var test = document.getElementsByClassName("linksmain");
+            for(var i=0;i<test.length;i++){ test[i].style.display="none"}
+            var test = document.getElementsByClassName("linkstwostep");
+            for(var i=0;i<test.length;i++){ test[i].style.display="block"}
+            document.getElementById("linksempty").style.display = "none";
+        }else{
+            changepage("mainpage");
+            var test = document.getElementsByClassName("linksmain");
+            for(var i=0;i<test.length;i++){ test[i].style.display="block"}
+            var test = document.getElementsByClassName("linkstwostep");
+            for(var i=0;i<test.length;i++){ test[i].style.display="none"}
+            document.getElementById("linksempty").style.display = "none";
+            document.getElementById("tablename").textContent = obj['name'];
+            document.getElementById("tablesurname").textContent = obj['surname'];
+            document.getElementById("tableinstitution").textContent = obj['institution'];
+            document.getElementById("tablespecialisation").textContent = obj['specialisation'];
+            document.getElementById("tablecountry").textContent = obj['country'];
+            document.getElementById("tableemail").textContent = obj['email'];
+            document.getElementById("tablephone").textContent = obj['phone'];
+        }
+    }
+
+}
+
+
+function changepage(s){
+
+    var data = eval(localStorage.getItem("div"));
+
+    for(var i = 0; i<Object.keys(data).length; i++){
+
+        if(data[i]['id']==s){
+            document.getElementById(data[i]['id']).style.display="block";
+        }else{
+            document.getElementById(data[i]['id']).style.display="none";
+        }
+
+    }
+
+    var inputs = document.getElementsByClassName("form-control");
+
+    for(var i=0; i<inputs.length; i++){
+
+        if(inputs[i].tagName=="SELECT") continue;
+
+        try{
+            inputs[i].value = "";
+        }catch{
+
+        }
+    }
+
+}
+
+
+function logout(){
+
+    var data = eval(localStorage.getItem("session"));
+
+    data[0]['id']=null;
+    data[0]['twostepdone']=false;
+
+    localStorage.setItem('session', JSON.stringify(data));
+
+    loadhome();
+
+}
+
+
+function login(){
+
+    var username = document.getElementById("usernameinput").value;
+    var password = document.getElementById("passwordinput").value;
+
+    var data = eval(localStorage.getItem("credentials"));
+    var id = null;
+
+    for(var i = 0; i<Object.keys(data).length; i++){
+
+        if(data[i]['username']==username && data[i]['password']==password){
+            id = data[i]['id'];
+            break;
+        }
+
+    }
+
+    if(id!=null){
+
+        data = eval(localStorage.getItem("session"));
+
+        data[0]['id']=id;
+        data[0]['twostepdone']=false;
+
+        localStorage.setItem('session', JSON.stringify(data));
+
+        loadhome();
+
+    }
+
+}
+
+function erase(){
+
+  localStorage.clear();
+  location.reload();
+
+}
+
+window.onload = function() {
+    
+    if(localStorage.getItem("credentials")==null){
+
+	  //data for example
+	  
+      localStorage.setItem('credentials', JSON.stringify([
+        {
+        id: "jdksa",
+        username: "mark",
+        password: "password",
+        name: "Mark",
+        surname: "Van der Flum",
+        institution: "Erasmus Medical Centre",
+        specialisation: "General Practitioner",
+        country: "Netherlands",
+        email: "markvanderflum@emc.com",
+        phone: "+12349875432"
+        },
+      ]));
+
+    }
+
+    if(localStorage.getItem("div")==null){
+
+        localStorage.setItem('div', JSON.stringify([
+        {
+        id: "loginpage"
+        },
+        {
+        id: "twosteppage"
+        },
+        {
+        id: "mainpage"
+        },
+        {
+        id: "new1"
+        },
+        {
+        id: "new2"
+        },
+        {
+        id: "patientlist"
+        },
+        {
+        id: "view"
+        },
+        ]));
+
+    }
+
+    if(localStorage.getItem("session")==null){
+
+        localStorage.setItem('session', JSON.stringify([
+        {
+        id: null,
+        twostepdone: false
+        },
+        ]));
+
+    }
+
+    if(localStorage.getItem("sections")==null){
+
+        localStorage.setItem('sections', JSON.stringify([
+        {
+        title: "Allergies",
+        fields:[
+          {
+            id: "mecicinesallergies",
+            name: "Medicine allergies",
+            type: "text"
+          },
+          {
+            id: "foodallergies",
+            name: "Food allergies",
+            type: "text"
+          }
+        ]
+        },
+        {
+        title: "Past surgeries",
+        fields:[
+          {
+            id: "surgeriesreceived",
+            name: "Surgeries received",
+            type: "text"
+          },
+          {
+            id: "recenthospitalization",
+            name: "Recent Hospitalization",
+            type: "text"
+          }
+        ]
+        },
+        {
+        title: "Healt Maintenance",
+        fields:[
+          {
+            id: "eyeexam",
+            name: "Eye exam",
+            type: "text"
+          },
+          {
+            id: "prostateexam",
+            name: "Prostate exam",
+            type: "text"
+          }
+        ]
+        },
+        ]));
+
+    }
+
+    if(localStorage.getItem("notes")==null){
+
+      localStorage.setItem('notes', '[{"patientname":"Jhoe Dawson","date":"2024-08-12","doctorid":"jdksa","mecicinesallergies":"","foodallergies":"cashews","surgeriesreceived":"heart surgery","recenthospitalization":"","eyeexam":"never","prostateexam":"never"},{"patientname":"Alan Walker","date":"2023-02-02","doctorid":"6h57gd","mecicinesallergies":"paracetamol","foodallergies":"strawberries","surgeriesreceived":"no","recenthospitalization":"no","eyeexam":"acute myopia was detected","prostateexam":"everything is fine"}]');
+
+    }
+
+    loadhome();
+
+  };
+
+  </script>
+
+<script>
+
+  const startButton = document.getElementById('startbutton');
+  const stopbutton = document.getElementById('stopbutton');
+
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+	recognition.lang = 'en-US';
+  //recognition.continuous = true;
+  //recognition.interimResults = true;
+
+  function startrecording(){
+
+    recognition.lang = document.getElementById("inputlan").value.split(":")[1];
+    recognition.start();
+
+    startbutton.style.display = "none";
+    stopbutton.style.display = "block";
+
+  }
+
+  function stoprecording(){
+    recognition.stop();
+    startbutton.style.display = "block";
+    stopbutton.style.display = "none";
+  }
+
+  recognition.onend = () => {
+    //recognition.start();
+    stoprecording();
+  };
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    document.getElementById('rec').value = document.getElementById('rec').value + " " + transcript;
+  };
+
+
+</script>
+
+<script>
+
+  function blink(id) {
+    var f = document.getElementById(id);
+    f.style.backgroundColor = 'rgb(148, 255, 166)';
+    setTimeout(function() {
+        f.style.backgroundColor = 'rgb(255, 255, 255)';
+    }, 900);
+  }
+
+  async function process(){
+
+    var s = document.getElementById("rec").value;
+
+    if(s=="") return;
+
+    document.getElementById('processbutton').innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://i.sstatic.net/kOnzy.gif" alt="Girl in a jacket" width="20" height="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    document.getElementById('processbutton').disabled = true;
+
+    //await new Promise(r => setTimeout(r, 2000));
+
+    var data = eval(localStorage.getItem("sections"));
+    var vet = [];
+    var strparametri = "";
+
+    for(var i = 0; i<Object.keys(data).length; i++){
+
+      var inside = data[i]['fields'];
+
+      for(var j = 0; j<Object.keys(inside).length; j++){
+        vet.push(inside[j]['id']);
+        strparametri = strparametri + inside[j]['id'] + " ";
+      }
+
+    }
+
+    var tt = [
+    {
+      id: 'mecicinesallergies',
+      text: 'ciao ciao',
+
+    },
+    {
+      id: 'eyeexam',
+      text: 'dadsa',
+
+    },
+    ];
+
+    var prompt = `devi estrapolare alcuni parametri da una conversazione tra dottore e paziente.
+vanno estrapolati i seguenti parametri del paziente: INSERISCIPARAMETRI.
+Devi dare solamente la risposta (senza aggiungere commenti) in formato json dove ciascun elemento contiene l'id del parametro che ti ho dato io e il testo che hai estratto.
+Ecco un esempio del formato di risposta che devi fornire: [{"id":"mecicinesallergies","text":"esempio"},{"id":"eyeexam","text":"esempio"}]
+i parametri devono non devono essere scritti come se fossero detti dal paziente, ma in formato generale. Per esempio se il paziente dice "sono allergico al pollo" tu estrai "pollo".
+se non trovi un certo parametro nella conversazione, allora non includerlo nella risposta.
+i parametri che estrai devono essere tradotti in lingua INSERISCILINGUA nella risposta.
+Ecco la conversazione da cui devi estrarre i parametri: INSERISCICONVERSAZIONE`
+
+    prompt=prompt.replace("INSERISCILINGUA",document.getElementById("outputlan").value.split(":")[0]);
+    prompt=prompt.replace("INSERISCICONVERSAZIONE",document.getElementById("rec").value);
+    prompt=prompt.replace("INSERISCIPARAMETRI",strparametri);
+    console.log(prompt);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", 'https://openrouter.ai/api/v1/chat/completions', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Authorization', 'INSERT_TOKEN_HERE');
+    xhr.send(JSON.stringify({
+        'model': 'meta-llama/llama-3.2-90b-vision-instruct:free',
+        'messages': [
+          {
+            'role':'user',
+            'content': prompt
+          }
+        ]
+    }));
+
+    xhr.onreadystatechange = function() { 
+
+      if (xhr.readyState == 4 && xhr.status == 200){
+
+        console.log(xhr.responseText);
+
+        var resp = JSON.parse(xhr.responseText);
+        var t = JSON.parse(resp['choices'][0]['message']['content']);
+        console.log(t);
+
+        for(var i = 0; i<Object.keys(t).length; i++){
+
+          document.getElementById(t[i]['id']).value = t[i]['text'];
+          blink(t[i]['id']);
+
+        }
+
+        document.getElementById('processbutton').innerHTML = '<i class="fa fa-arrow-right"></i> Fill';
+        document.getElementById('processbutton').disabled = false;
+      
+      }
+
+    }
+
+  }
+
+  function changelan(o){
+
+    if(o.id=="selectinputlan"){
+      document.getElementById("inputlan").value = o.value;
+    }else{
+      document.getElementById("outputlan").value = o.value;
+    }
+
+  }
+
+</script>
+
+
+  <!-- Bootstrap JavaScript 
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
